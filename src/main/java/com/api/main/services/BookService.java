@@ -2,7 +2,6 @@ package com.api.main.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
@@ -45,7 +44,13 @@ public class BookService {
 
 //	update book
 	public void updateBook(Book book, int bid) {
-		
+		list=list.stream().map(b->{
+			if (b.getPid()==bid) {
+				b.setPtitle(book.getPtitle());
+				b.setPauthor(book.getPauthor());
+			}
+			return b;
+		}).collect(Collectors.toList());
 		
 	}
 	
